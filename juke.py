@@ -17,7 +17,7 @@ def songs_in(folder):
     for path in file_paths:
         song = os.path.basename(path).split(" ")[0]
         album = os.path.basename(os.path.dirname(path)).split(" ")[0]
-        yield (int(album), int(song), path)
+        yield (int(album, base=10), int(song, base=10), path)
 
 def build_songbook(folder):
     songbook = defaultdict(dict) 
