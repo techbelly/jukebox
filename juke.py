@@ -43,13 +43,14 @@ def play_list(songs, player, current_song):
 
 def play_song(songbook, album_id, song_id, display, player):
     song_number = "%02d%02d" % (album_id,song_id) 
-    if album_id in songbook and song_id == 0:
-        album = songbook[album_id]
-        if album:
+    if album_id in songbook:
+        if song_id == 0:
+            album = songbook[album_id]
             songs = [album[key] for key in sorted(album.keys())] 
             play_list(songs, player, song_number)
-    elif album_id in songbook and song_id in songbook[album_id]:
-        play_list([songbook[album_id][song_id]], player, song_number)
+        elif song_id in songbook[album_id]:
+            song = songbook[album_id][song_id]
+            play_list([song], player, song_number)
 
 
 def convert_keypresses(keypresses):
