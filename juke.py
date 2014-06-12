@@ -56,19 +56,24 @@ def album_from_path(path):
 def format_title(album_id, song_id, title):
     return "%02d%02d: %s" % (album_id, song_id, title)
 
+def play_whole_album(songbook, album_id, song_id, display, player):
+    album = songbook[album_id]
+    songs = [album[key] for key in sorted(album.keys())]
+    if songs:
+        title = format_title(album_id, song_id, album_from_path(songs[0]))
+        play_list(songs, player, title)
+
+def play_single_song(songbook, album_id, song_id, display, player):
+    song = songbook[album_id][song_id]
+    title = format_title(album_id, song_id, song_from_path(song))
+    play_list([song], player, title)
+
 def play_song(songbook, album_id, song_id, display, player):
     if album_id in songbook:
         if song_id == 0:
-            album = songbook[album_id]
-            songs = [album[key] for key in sorted(album.keys())] 
-            if songs:
-                title = format_title(album_id, song_id, album_from_path(songs[0]))
-                play_list(songs, player, title)
+            play_whole_album(songbook, album_id, song_id, display, player)
         elif song_id in songbook[album_id]:
-            song = songbook[album_id][song_id]
-            title = format_title(album_id, song_id, song_from_path(song))
-            play_list([song], player, title)
-
+            play_single_song(songbook, album_id, song_id, display, player)
 
 def convert_keypresses(keypresses):
     album = int("".join(keypresses[0:2]), base=10)
