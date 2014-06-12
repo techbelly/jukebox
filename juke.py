@@ -49,7 +49,7 @@ def play_song(songbook, album_id, song_id, display, player):
             songs = [album[key] for key in sorted(album.keys())] 
             play_list(songs, player, song_number)
     elif album_id in songbook and song_id in songbook[album_id]:
-        play_list([songbook[album_id][song_id]], player, song_numer)
+        play_list([songbook[album_id][song_id]], player, song_number)
 
 
 def convert_keypresses(keypresses):
