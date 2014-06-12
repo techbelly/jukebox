@@ -24,7 +24,7 @@ def songs_in(folder):
 
 def build_songbook(folder):
     songbook = defaultdict(dict) 
-    for (album, song, path) in songs_in(sys.argv[1]):
+    for (album, song, path) in songs_in(folder):
         songbook[album][song] = path 
     return songbook
 
