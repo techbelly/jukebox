@@ -1,7 +1,9 @@
 import serial
 from time import sleep
 
+
 class PiLcdDisplay(object):
+
     def __init__(self, screen):
         self.ser = serial.Serial()
         self.ser.port = "/dev/ttyAMA0"
@@ -26,7 +28,9 @@ class PiLcdDisplay(object):
             self.line2 = line2
             self.update()
 
+
 class CursesDisplay(object):
+
     def __init__(self, screen):
         self.screen = screen
         self.line1 = ""
@@ -53,4 +57,3 @@ if __name__ == "__main__":
     display.line1 = "Hello"
     display.line2 = "There"
     display.update()
-
