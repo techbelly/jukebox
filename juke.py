@@ -13,11 +13,14 @@ else:
 
 def songs_in(folder):
     file_paths = glob.glob(folder+"/**/*.m4a") + glob.glob(folder+"/**/*.mp3")
-    print(file_paths)
+
+    def file_prefix_number(path):
+        return int(os.path.basename(path).split(" ")[0], base=10)
+
     for path in file_paths:
-        song = os.path.basename(path).split(" ")[0]
-        album = os.path.basename(os.path.dirname(path)).split(" ")[0]
-        yield (int(album, base=10), int(song, base=10), path)
+        song = file_prefix_number(path)
+        album = file_prefix_number(os.path.dirname(path))
+        yield (album, song, path)
 
 def build_songbook(folder):
     songbook = defaultdict(dict) 
