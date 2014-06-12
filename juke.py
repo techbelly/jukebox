@@ -41,16 +41,33 @@ def play_list(songs, player, current_song):
     player.current_song = current_song
     player.play()
 
+def path_component(path, num):
+    return path.split("/")[num]
+
+def name_without_number(path, num):
+    return " ".join(path_component(path, num).split(" ")[1:])
+
+def song_from_path(path):
+    return ".".join(name_without_number(path, -1).split(".")[:-1])
+
+def album_from_path(path):
+    return name_without_number(path, -2)
+
+def format_title(album_id, song_id, title):
+    return "%02d%02d: %s" % (album_id, song_id, title)
+
 def play_song(songbook, album_id, song_id, display, player):
-    song_number = "%02d%02d" % (album_id,song_id) 
     if album_id in songbook:
         if song_id == 0:
             album = songbook[album_id]
             songs = [album[key] for key in sorted(album.keys())] 
-            play_list(songs, player, song_number)
+            if songs:
+                title = format_title(album_id, song_id, album_from_path(songs[0]))
+                play_list(songs, player, title)
         elif song_id in songbook[album_id]:
             song = songbook[album_id][song_id]
-            play_list([song], player, song_number)
+            title = format_title(album_id, song_id, song_from_path(song))
+            play_list([song], player, title)
 
 
 def convert_keypresses(keypresses):
@@ -76,7 +93,7 @@ def update_display(keypresses, player):
     if len(keypresses):
         display.set("".join(keypresses)+"_")
     elif player.is_playing() and player.current_song:
-        display.set("Playing "+player.current_song)
+        display.set(player.current_song)
     else:
         display.set("READY")
 
