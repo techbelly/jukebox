@@ -26,7 +26,7 @@ class PiLcdDisplay(object):
             self.line2 = line2
             self.update()
 
-class FakeDisplay(object):
+class CursesDisplay(object):
     def __init__(self, screen):
         self.screen = screen
         self.line1 = ""

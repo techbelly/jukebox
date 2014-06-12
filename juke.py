@@ -2,14 +2,14 @@
 import sys, glob, os
 import vlc
 import curses
-from display import PiLcdDisplay, FakeDisplay
+from display import PiLcdDisplay, CursesDisplay
 from collections import defaultdict
 from contextlib import contextmanager
 
 if 'USE_LCD' in os.environ:
     Display = PiLcdDisplay
 else: 
-    Display = FakeDisplay
+    Display = CursesDisplay
 
 def songs_in(folder):
     file_paths = glob.glob(folder+"/**/*.m4a") + glob.glob(folder+"/**/*.mp3")
