@@ -31,7 +31,7 @@ So, given
 
 5001 would play First Song and 5002 Second Song and 5000 The whole album. See, easy?
 
-Clearly it only supports 100 albums using numbers, and a bunch more if you start using letters. 
+Clearly it only supports 100 albums (00-99)
 
 ## optional LCD display
 
