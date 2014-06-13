@@ -6,28 +6,28 @@ import string
 class BaseDisplay(object):
 
     def __init__(self):
-        self.line1 = ""
-        self.line2 = ""
+        self.text = ""
         self.update()
 
     def clear(self):
         pass
 
-    def write_lines(self, line1, line2):
+    def write_lines(self, text):
         pass 
 
     def update(self):
         self.clear()
-        clean_line1 = filter(lambda x: x in string.printable, self.line1)
-        clean_line2 = filter(lambda x: x in string.printable, self.line2)
-        line1_padded = clean_line1[:16].ljust(16)
+        line1 = self.text[0:16]
+        line2 = self.text[16:]
+        clean_line1 = filter(lambda x: x in string.printable, line1)
+        clean_line2 = filter(lambda x: x in string.printable, line2)
+        line1_padded = clean_line1.ljust(16)
         line2_padded = clean_line2[:16].ljust(16)
         self.write_lines(line1_padded, line2_padded)
 
-    def set(self, line1, line2=""):
-        if line1 != self.line1 or line2 != self.line2:
-            self.line1 = line1
-            self.line2 = line2
+    def set(self, text):
+        if text != self.text:
+            self.text = text 
             self.update()
             
 

@@ -154,7 +154,7 @@ if __name__ == "__main__":
     with curses_context() as screen:
         music_folder = sys.argv[1]
         display = Display(screen)
-        display.set("Starting up", "")
+        display.set("Starting up")
         songbook = build_songbook(music_folder)
         player = make_player()
         main_loop(display, songbook, player, screen)
